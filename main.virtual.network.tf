@@ -20,8 +20,9 @@ module "hub_virtual_networks" {
 }
 
 module "hub_virtual_network_subnets" {
-  source   = "Azure/avm-res-network-virtualnetwork/azurerm//modules/subnet"
-  version  = "0.7.1"
+  source = "../avm-res-network-virtualnetwork/modules/subnet"
+  # source   = "Azure/avm-res-network-virtualnetwork/azurerm//modules/subnet"
+  # version  = "0.7.1"
   for_each = local.subnets
 
   address_prefix                                = each.value.address_prefix

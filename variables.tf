@@ -85,7 +85,7 @@ variable "hub_virtual_networks" {
             }
           )
         ))
-        default_outbound_access_enabled = optional(bool, false)
+        default_outbound_access_enabled = optional(bool)
       }
     )), {})
 
