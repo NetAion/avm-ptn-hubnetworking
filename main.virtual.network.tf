@@ -24,6 +24,7 @@ module "hub_virtual_network_subnets" {
   version  = "0.7.1"
   for_each = local.subnets
 
+  address_prefix                                = each.value.address_prefix
   address_prefixes                              = each.value.address_prefixes
   default_outbound_access_enabled               = each.value.default_outbound_access_enabled
   delegation                                    = each.value.delegation

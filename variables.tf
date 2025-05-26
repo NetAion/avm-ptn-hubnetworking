@@ -52,7 +52,8 @@ variable "hub_virtual_networks" {
     subnets = optional(map(object(
       {
         name             = string
-        address_prefixes = list(string)
+        address_prefix   = optional(string)
+        address_prefixes = optional(list(string))
         nat_gateway = optional(object({
           id = string
         }))

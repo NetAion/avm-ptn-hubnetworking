@@ -52,6 +52,7 @@ locals {
         virtual_network_key                           = k
         virtual_network_id                            = local.virtual_network_id[k]
         name                                          = subnet.name
+        address_prefix                                = subnet.address_prefix
         address_prefixes                              = subnet.address_prefixes
         nat_gateway                                   = subnet.nat_gateway
         network_security_group                        = subnet.network_security_group
