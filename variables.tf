@@ -15,8 +15,14 @@ variable "hub_virtual_networks" {
     address_space                   = list(string)
     location                        = string
     resource_group_name             = string
+
     route_table_name_firewall       = optional(string)
     route_table_name_user_subnets   = optional(string)
+    route_table_settings = optional(object({
+      bgp_route_propagation_enabled = optional(bool,true)
+      tags                          = optional(map(string))
+    }))
+
     bgp_community                   = optional(string)
     ddos_protection_plan_id         = optional(string)
     dns_servers                     = optional(list(string))
