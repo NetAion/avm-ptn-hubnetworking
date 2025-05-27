@@ -41,7 +41,7 @@ module "hub_routing_user_subnets" {
   location                      = each.value.location
   name                          = coalesce(var.hub_virtual_networks[each.key].route_table_name_user_subnets, "rt-user-subnets-${each.key}")
   resource_group_name           = try(each.value.resource_group_name, azurerm_resource_group.rg[each.key].name)
-  bgp_route_propagation_enabled = try(each.value.route_table_settings.bgp_route_propagation_enabled,true)
+  bgp_route_propagation_enabled = try(each.value.route_table_settings.bgp_route_propagation_enabled, true)
   enable_telemetry              = var.enable_telemetry
   tags                          = each.value.route_table_settings.tags == null ? (each.value.tags == null ? var.tags : each.value.tags) : each.value.route_table_settings.tags
 }
