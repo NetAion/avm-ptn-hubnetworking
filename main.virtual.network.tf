@@ -1,6 +1,7 @@
 module "hub_virtual_networks" {
-  source   = "Azure/avm-res-network-virtualnetwork/azurerm"
-  version  = "0.7.1"
+  source = "github.com/NetAion/avm-res-network-virtualnetwork?ref=v0.8.1-fork.1"
+  # source   = "Azure/avm-res-network-virtualnetwork/azurerm"
+  # version  = "0.7.1"
   for_each = var.hub_virtual_networks
 
   address_space       = each.value.address_space
@@ -13,17 +14,20 @@ module "hub_virtual_networks" {
   dns_servers = each.value.dns_servers == null ? null : {
     dns_servers = each.value.dns_servers
   }
-  enable_telemetry        = var.enable_telemetry
-  flow_timeout_in_minutes = each.value.flow_timeout_in_minutes
-  name                    = each.value.name
-  tags                    = each.value.tags == null ? var.tags : each.value.tags
+  enable_telemetry               = var.enable_telemetry
+  flow_timeout_in_minutes        = each.value.flow_timeout_in_minutes
+  private_endpoint_vnet_policies = each.value.private_endpoint_vnet_policies
+  name                           = each.value.name
+  tags                           = each.value.tags == null ? var.tags : each.value.tags
 }
 
 module "hub_virtual_network_subnets" {
-  source   = "Azure/avm-res-network-virtualnetwork/azurerm//modules/subnet"
-  version  = "0.7.1"
+  source = "github.com/NetAion/avm-res-network-virtualnetwork//modules/subnet?ref=v0.8.1-fork.1"
+  # source   = "Azure/avm-res-network-virtualnetwork/azurerm//modules/subnet"
+  # version  = "0.7.1"
   for_each = local.subnets
 
+  address_prefix                                = each.value.address_prefix
   address_prefixes                              = each.value.address_prefixes
   default_outbound_access_enabled               = each.value.default_outbound_access_enabled
   delegation                                    = each.value.delegation

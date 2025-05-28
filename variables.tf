@@ -11,16 +11,21 @@ DESCRIPTION
 
 variable "hub_virtual_networks" {
   type = map(object({
-    name                            = string
-    address_space                   = list(string)
-    location                        = string
-    resource_group_name             = string
-    route_table_name_firewall       = optional(string)
-    route_table_name_user_subnets   = optional(string)
+    name                          = string
+    address_space                 = list(string)
+    location                      = string
+    resource_group_name           = string
+    route_table_name_firewall     = optional(string)
+    route_table_name_user_subnets = optional(string)
+    route_table_settings = optional(object({
+      bgp_route_propagation_enabled = optional(bool, true)
+      tags                          = optional(map(string))
+    }))
+
     bgp_community                   = optional(string)
     ddos_protection_plan_id         = optional(string)
     dns_servers                     = optional(list(string))
-    flow_timeout_in_minutes         = optional(number, 4)
+    flow_timeout_in_minutes         = optional(number)
     mesh_peering_enabled            = optional(bool, true)
     peering_names                   = optional(map(string))
     resource_group_creation_enabled = optional(bool, true)
@@ -30,6 +35,7 @@ variable "hub_virtual_networks" {
     routing_address_space           = optional(list(string), [])
     hub_router_ip_address           = optional(string)
     tags                            = optional(map(string))
+    private_endpoint_vnet_policies  = optional(string)
 
     route_table_entries_firewall = optional(set(object({
       name           = string
@@ -52,7 +58,8 @@ variable "hub_virtual_networks" {
     subnets = optional(map(object(
       {
         name             = string
-        address_prefixes = list(string)
+        address_prefix   = optional(string)
+        address_prefixes = optional(list(string))
         nat_gateway = optional(object({
           id = string
         }))
@@ -78,7 +85,7 @@ variable "hub_virtual_networks" {
             }
           )
         ))
-        default_outbound_access_enabled = optional(bool, false)
+        default_outbound_access_enabled = optional(bool)
       }
     )), {})
 
