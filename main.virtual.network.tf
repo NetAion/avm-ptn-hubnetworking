@@ -1,5 +1,5 @@
 module "hub_virtual_networks" {
-  source = "../avm-res-network-virtualnetwork"
+  source = "github.com/NetAion/avm-res-network-virtualnetwork?ref=v0.8.1-fork.1"
   # source   = "Azure/avm-res-network-virtualnetwork/azurerm"
   # version  = "0.7.1"
   for_each = var.hub_virtual_networks
@@ -22,7 +22,7 @@ module "hub_virtual_networks" {
 }
 
 module "hub_virtual_network_subnets" {
-  source = "../avm-res-network-virtualnetwork/modules/subnet"
+  source = "github.com/NetAion/avm-res-network-virtualnetwork//modules/subnet?ref=v0.8.1-fork.1"
   # source   = "Azure/avm-res-network-virtualnetwork/azurerm//modules/subnet"
   # version  = "0.7.1"
   for_each = local.subnets
